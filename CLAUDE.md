@@ -76,3 +76,4 @@ cd C:/Users/Admin/Documents/cicd/frontend && npm run dev
     - deleted 假删除
     - create_time 创建时间
     - update_time 更新时间
+- 生成列表接口的时候有分页功能
