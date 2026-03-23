@@ -3,8 +3,12 @@
     <el-card class="login-card">
       <template #header>
         <div class="card-header">
-          <el-tag type="danger" style="margin-right:8px">管理员</el-tag>
-          <span>管理员登录</span>
+          <div class="brand-logo">📱</div>
+          <h1 class="brand-title">应用管理系统</h1>
+          <div class="admin-badge-wrapper">
+            <el-tag type="warning" class="admin-badge">管理员</el-tag>
+          </div>
+          <p class="login-subtitle">管理员登录</p>
         </div>
       </template>
       <el-form :model="form" :rules="rules" ref="formRef" label-width="80px">
@@ -15,7 +19,7 @@
           <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password />
         </el-form-item>
         <el-form-item>
-          <el-button type="danger" :loading="loading" @click="handleLogin" style="width:100%">
+          <el-button type="warning" :loading="loading" @click="handleLogin" class="login-button">
             管理员登录
           </el-button>
         </el-form-item>
@@ -68,14 +72,52 @@ async function handleLogin() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: #f5f7fa;
+  padding: 20px;
 }
 .login-card {
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 .card-header {
-  font-size: 18px;
-  font-weight: bold;
   text-align: center;
+  padding: 8px 0;
+}
+.brand-logo {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+.brand-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #303133;
+  margin: 0 0 8px 0;
+}
+.admin-badge-wrapper {
+  margin: 8px 0;
+}
+.admin-badge {
+  font-size: 14px;
+}
+.login-subtitle {
+  font-size: 16px;
+  color: #909399;
+  margin: 0;
+}
+.login-button {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    max-width: 100%;
+  }
+  .brand-logo {
+    font-size: 40px;
+  }
+  .brand-title {
+    font-size: 20px;
+  }
 }
 </style>

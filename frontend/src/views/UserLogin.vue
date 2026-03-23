@@ -3,7 +3,9 @@
     <el-card class="login-card">
       <template #header>
         <div class="card-header">
-          <span>用户登录</span>
+          <div class="brand-logo">📱</div>
+          <h1 class="brand-title">应用管理系统</h1>
+          <p class="login-subtitle">用户登录</p>
         </div>
       </template>
       <el-form :model="form" :rules="rules" ref="formRef" label-width="80px">
@@ -14,7 +16,7 @@
           <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" :loading="loading" @click="handleLogin" style="width:100%">
+          <el-button type="primary" :loading="loading" @click="handleLogin" class="login-button">
             登录
           </el-button>
         </el-form-item>
@@ -67,14 +69,46 @@ async function handleLogin() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #f5f7fa;
+  padding: 20px;
 }
 .login-card {
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 .card-header {
-  font-size: 18px;
-  font-weight: bold;
   text-align: center;
+  padding: 8px 0;
+}
+.brand-logo {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+.brand-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #303133;
+  margin: 0 0 8px 0;
+}
+.login-subtitle {
+  font-size: 16px;
+  color: #909399;
+  margin: 0;
+}
+.login-button {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    max-width: 100%;
+  }
+  .brand-logo {
+    font-size: 40px;
+  }
+  .brand-title {
+    font-size: 20px;
+  }
 }
 </style>
