@@ -67,6 +67,39 @@ cd C:/Users/Admin/Documents/cicd/frontend && npm run dev
 |--------|------|------|
 | admin  | admin | 管理员 |
 
+## Git 配置
+
+### 代理设置
+
+由于网络环境限制，需要配置代理才能访问 GitHub：
+
+```bash
+# 配置 HTTP 代理（推荐）
+git config --global http.proxy http://127.0.0.1:7890
+
+# 取消代理配置
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+### 提交代码流程
+
+```bash
+# 1. 查看状态
+git status
+
+# 2. 添加文件
+git add <文件路径>
+
+# 3. 提交
+git commit -m "提交信息
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+
+# 4. 推送到远程
+git push
+```
+
 ## 注意事项
 
 - 前端 vite 已配置 `/api` 代理到 `http://127.0.0.1:8000`，后端必须先启动
@@ -77,3 +110,4 @@ cd C:/Users/Admin/Documents/cicd/frontend && npm run dev
     - create_time 创建时间
     - update_time 更新时间
 - 生成列表接口的时候有分页功能
+- Git 推送大文件时可能需要配置代理，使用 `http://127.0.0.1:7890`
