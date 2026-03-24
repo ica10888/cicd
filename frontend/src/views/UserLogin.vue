@@ -49,7 +49,8 @@ async function handleLogin() {
   try {
     const { data } = await login({ ...form, role: 'user' })
     if (data.code === 200) {
-      sessionStorage.setItem('user', JSON.stringify(data.data))
+      localStorage.setItem('token', data.data.token)
+      localStorage.setItem('user', JSON.stringify(data.data))
       ElMessage.success('登录成功')
       router.push('/apps')
     } else {

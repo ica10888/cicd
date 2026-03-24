@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'apps',
 ]
@@ -64,6 +65,7 @@ DATABASES = {
         'PORT': config.get('database', 'port'),
         'OPTIONS': {
             'charset': 'utf8mb4',
+            'init_command': "SET sql_mode='ALLOW_INVALID_DATES'",
         },
     }
 }
@@ -89,6 +91,12 @@ CORS_ALLOW_CREDENTIALS = True
 
 # REST Framework
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [],
-    'DEFAULT_PERMISSION_CLASSES': [],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
 }

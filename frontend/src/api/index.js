@@ -2,6 +2,27 @@ import axios from 'axios'
 
 const http = axios.create({ baseURL: '/api', timeout: 10000 })
 
+// 请求拦截器：自动附加 token
+http.interceptors.request.use(config => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Token ${token}`
+  }
+  return config
+})
+
+// 响应拦截器：token 失效时跳转登录
+http.interceptors.response.use(
+  res => res,
+  err => {
+    if (err.response?.status === 401) {
+      localStorage.clear()
+      window.location.href = '/login'
+    }
+    return Promise.reject(err)
+  }
+)
+
 export const login = (data) => http.post('/login/', data)
 export const getApps = () => http.get('/apps/')
 export const createApp = (data) => http.post('/apps/', data)
