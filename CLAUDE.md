@@ -110,4 +110,5 @@ git push
     - create_time 创建时间
     - update_time 更新时间
 - 生成列表接口的时候有分页功能
+- 前端读取列表数据时，分页接口返回 `data.data.results`（非 `data.data`），用户信息统一存取 `localStorage`（非 `sessionStorage`）
 - Git 推送大文件时可能需要配置代理，使用 `http://127.0.0.1:7890`

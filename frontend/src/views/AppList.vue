@@ -81,7 +81,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { getApps, createApp, updateApp, deleteApp } from '../api/index.js'
 
 const router = useRouter()
-const currentUser = reactive(JSON.parse(sessionStorage.getItem('user') || '{}'))
+const currentUser = reactive(JSON.parse(localStorage.getItem('user') || '{}'))
 const isAdmin = computed(() => currentUser.role === 'admin')
 
 const apps = ref([])
@@ -102,7 +102,7 @@ async function fetchApps() {
   loading.value = true
   try {
     const { data } = await getApps()
-    if (data.code === 200) apps.value = data.data
+    if (data.code === 200) apps.value = data.data.results
   } finally {
     loading.value = false
   }
@@ -148,7 +148,7 @@ async function handleDelete(row) {
 }
 
 function logout() {
-  sessionStorage.clear()
+  localStorage.clear()
   router.push('/login')
 }
 

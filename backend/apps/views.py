@@ -236,7 +236,11 @@ class LoginView(APIView):
             return error('无管理员权限', 403)
 
         from django.contrib.auth.models import User as DjangoUser
-        django_user, _ = DjangoUser.objects.get_or_create(username=username)
+        from django.utils import timezone
+        django_user, _ = DjangoUser.objects.get_or_create(
+            username=username,
+            defaults={'last_login': timezone.now()}
+        )
         token, _ = Token.objects.get_or_create(user=django_user)
 
         return success({

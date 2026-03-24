@@ -147,7 +147,7 @@ import { getApps, getRoles, createRole, deleteRole,
          getPermissions, createPermission, updatePermission, deletePermission } from '../api/index.js'
 
 const router = useRouter()
-const currentUser = reactive(JSON.parse(sessionStorage.getItem('user') || '{}'))
+const currentUser = reactive(JSON.parse(localStorage.getItem('user') || '{}'))
 
 const roles = ref([])
 const apps = ref([])
@@ -175,12 +175,12 @@ const permRules = {}
 
 async function fetchRoles() {
   const { data } = await getRoles()
-  if (data.code === 200) roles.value = data.data
+  if (data.code === 200) roles.value = data.data.results
 }
 
 async function fetchApps() {
   const { data } = await getApps()
-  if (data.code === 200) apps.value = data.data
+  if (data.code === 200) apps.value = data.data.results
 }
 
 async function fetchPermissions() {
@@ -188,7 +188,7 @@ async function fetchPermissions() {
   permLoading.value = true
   try {
     const { data } = await getPermissions({ role_id: activeRoleId.value })
-    if (data.code === 200) permissions.value = data.data
+    if (data.code === 200) permissions.value = data.data.results
   } finally {
     permLoading.value = false
   }
@@ -274,7 +274,7 @@ function roleTagType(t) {
   return { developer: 'primary', tester: 'warning', ops: 'success' }[t] || 'info'
 }
 
-function logout() { sessionStorage.clear(); router.push('/login') }
+function logout() { localStorage.clear(); router.push('/login') }
 
 onMounted(() => {
   if (!currentUser.id || currentUser.role !== 'admin') { router.push('/login'); return }
