@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pip show:*)"
-    ]
-  }
+      "Bash(pip show:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"chore: 启用 bypassPermissions 和 skipDangerousModePermissionPrompt:*)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "skipDangerousModePermissionPrompt": true
 }
